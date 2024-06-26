@@ -10,7 +10,9 @@ export const MovieTitle = ({ movie }: { movie: MovieItem }) => {
   return (
     <Pressable
       onPress={() => {
-        router.navigate("/movie/" + movie.id);
+        router.navigate(
+          `/movie/${movie.id}?backdropPath=${movie.backdrop_path}`
+        );
       }}
     >
       <ThemedText

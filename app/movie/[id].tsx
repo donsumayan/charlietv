@@ -3,7 +3,7 @@ import { MovieDetails } from "@/types/MovieDetail";
 import { Image } from "expo-image";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Dimensions, ScrollView, Text, View } from "react-native";
 
 const Movie = () => {
   const params = useLocalSearchParams();
@@ -19,7 +19,7 @@ const Movie = () => {
   return (
     <View style={{ flex: 1 }}>
       <Image
-        source={`https://image.tmdb.org/t/p/original/${movieDetails?.backdrop_path}`}
+        source={`https://image.tmdb.org/t/p/original/${params?.backdropPath}`}
         contentFit="cover"
         contentPosition="center"
         style={{
@@ -28,7 +28,7 @@ const Movie = () => {
           zIndex: 0,
           position: "absolute",
         }}
-        transition={1000}
+        transition={500}
       />
 
       <View
@@ -42,7 +42,7 @@ const Movie = () => {
       >
         <View
           style={{
-            backgroundColor: "rgba(254, 254, 254, 0.5)",
+            backgroundColor: "rgba(254, 254, 254, 0.8)",
             borderRadius: 10,
             padding: 10,
           }}
@@ -56,6 +56,29 @@ const Movie = () => {
           >
             This Page is WIP 🚧👷🏾
           </Text>
+        </View>
+        <View
+          style={{
+            backgroundColor: "rgba(254, 254, 254, 0.8)",
+            borderRadius: 10,
+            padding: 10,
+            marginTop: 10,
+            height: 300,
+            width: Dimensions.get("screen").width - 20,
+          }}
+        >
+          <ScrollView>
+            <Text
+              style={{
+                fontSize: 10,
+                opacity: 10,
+                fontWeight: "bold",
+              }}
+            >
+              Detail dump:{"\n"}
+              {!movieDetails ? "loading" : JSON.stringify(movieDetails)}
+            </Text>
+          </ScrollView>
         </View>
       </View>
     </View>
