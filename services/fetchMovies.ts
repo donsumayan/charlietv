@@ -21,11 +21,15 @@ export const fetchMovies = async (page = 1) => {
     {},
   );
 
-  return {
-    ...topRatedMoviesResponse,
-    results: topRatedMoviesResponse.results.map(({ genre_ids, ...movie }) => ({
+  const movieItems = topRatedMoviesResponse.results.map(
+    ({ genre_ids, ...movie }) => ({
       ...movie,
       genres: genre_ids.map((id) => genreNames[id]),
-    })),
+    }),
+  );
+
+  return {
+    ...topRatedMoviesResponse,
+    results: movieItems,
   };
 };

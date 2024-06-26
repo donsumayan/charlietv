@@ -14,7 +14,6 @@ export const MovieOverview = ({ movie }: { movie: MovieItem }) => {
           fontSize: 12,
           paddingRight: 15,
           paddingBottom: 10,
-          borderRadius: 10,
         }}
       >
         {movie.overview}

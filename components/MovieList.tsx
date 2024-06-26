@@ -1,7 +1,13 @@
 import { MovieItem } from "@/types/Movie";
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import { useCallback, useState } from "react";
-import { RefreshControl, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { MovieGenre } from "./MovieGenre";
 import { MovieTitle } from "./MovieTitle";
 import { MovieOverview } from "./MovieOverview";
@@ -34,10 +40,11 @@ export const MovieList = (props: props) => {
       data={movies}
       estimatedItemSize={300}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={doRefresh} />
+        <RefreshControl refreshing={!!refreshing} onRefresh={doRefresh} />
       }
       onEndReached={onEndReached}
       renderItem={RenderItem}
+      ListEmptyComponent={RenderEmpty}
     />
   );
 };
@@ -53,6 +60,20 @@ const RenderItem: ListRenderItem<MovieItem> = ({ index, item: movie }) => (
         <MovieOverview movie={movie} />
       </View>
     </View>
+  </View>
+);
+
+const RenderEmpty = () => (
+  <View
+    style={{
+      alignItems: "center",
+      justifyContent: "center",
+      height: Dimensions.get("window").height - 300,
+    }}
+  >
+    <Text>oh how the list is empty 😭</Text>
+    <Text>maybe its still loading? 🤔</Text>
+    <Text>maybe its broken? 🤔</Text>
   </View>
 );
 

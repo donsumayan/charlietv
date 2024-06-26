@@ -10,6 +10,12 @@ export default function RootLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="movie"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }
